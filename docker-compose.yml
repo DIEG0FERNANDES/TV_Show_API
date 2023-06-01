@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  mongo:
+    image: 'mongo:latest'
+    ports:
+      - 27017:27017
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: dev
+      ME_CONFIG_BASICAUTH_PASSWORD: senha123
+      
+  db_pg:
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_PASSWORD: senha123
+      POSTGRES_USER: dev
+      POSTGRES_DB: authdb
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '5434:5432'
+    networks:
+      - postgres-compose-network
+
+  db_pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev@email.com
+      PGADMIN_DEFAULT_PASSWORD: senha123
+    ports:
+      - "16543:80"
+    depends_on:
+      - db_pg
+    networks:
+      - postgres-compose-network
+
+networks: 
+  postgres-compose-network:
+    driver: bridge
