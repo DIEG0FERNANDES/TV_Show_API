@@ -1,0 +1,8 @@
+{
+  "name": "TV_Show_API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/DIEG0FERNANDES/TV_Show_API.git",
+  "author": "Diego_dos_Santos_Fernandes <cookieezito@hotmail.com>",
+  "license": "MIT"
+}
